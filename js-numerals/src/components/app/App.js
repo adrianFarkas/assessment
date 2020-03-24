@@ -89,10 +89,11 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setResult(numToWord(value));
+    const result = numToWord(value);
+    if (value !== "") setResult(result);
   };
 
-  const handleFocus = e => {
+  const handleClick = e => {
     setValue("");
   };
 
@@ -108,7 +109,7 @@ function App() {
             onChange={handleChange}
             value={value}
             placeholder="Type a number"
-            onFocus={handleFocus}
+            onClick={handleClick}
           />
           <Button type="submit">Convert</Button>
         </form>
