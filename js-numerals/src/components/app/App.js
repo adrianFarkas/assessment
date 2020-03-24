@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { numToWord } from "../../utils/converter";
 
 const Container = styled.div`
   height: 100vh;
@@ -88,8 +89,11 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setResult("");
-    //TODO
+    setResult(numToWord(value));
+  };
+
+  const handleFocus = e => {
+    setValue("");
   };
 
   return (
@@ -99,9 +103,12 @@ function App() {
         <form onSubmit={handleSubmit}>
           <Input
             type="number"
+            min="-999999999999999"
+            max="999999999999999"
             onChange={handleChange}
             value={value}
             placeholder="Type a number"
+            onFocus={handleFocus}
           />
           <Button type="submit">Convert</Button>
         </form>
