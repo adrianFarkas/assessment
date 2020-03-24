@@ -1,13 +1,24 @@
 import { FROM_0_TO_19, TENS, SCALE } from "./BasicNums";
 
-export const numToWord = num => {
-  let word = convertNumber(num);
-  if (num < 0) word = `minus ${word}`;
-  return word;
+export const numToWord = number => {
+  const num = Math.abs(number);
+  if (num === 0) return FROM_0_TO_19[0];
+  const word = convertNumber(num, 0);
+  return number < 0 ? `minus ${word}` : word;
+};
+
+const convertNumber = (num, index) => {
+  if (num === 0) return "";
+
+  let word = convertToThreeDigits(num % 1000);
+  let remainder = getRoundedDistributedNum(num, 1000);
+
+  if (index > 0) word += ` ${SCALE[index - 1]}`;
+
+  return `${convertNumber(remainder, index + 1)} ${word}`.trim();
 };
 
 const convertToTwoDigits = num => {
-  num = Math.abs(num);
   if (num < 20) return FROM_0_TO_19[num];
 
   const tens_index = getRoundedDistributedNum(num, 10) - 1;
@@ -18,6 +29,7 @@ const convertToTwoDigits = num => {
 
 const convertToThreeDigits = num => {
   if (num === 0) return "";
+
   if (num.toString().length === 1) return FROM_0_TO_19[num];
   if (num.toString().length === 2) return convertToTwoDigits(num);
   if (num % 100 === 0) return `${FROM_0_TO_19[num / 100]} hundred`;
@@ -28,26 +40,4 @@ const convertToThreeDigits = num => {
 
 const getRoundedDistributedNum = (toDivide, divideWith) => {
   return Math.floor(toDivide / divideWith);
-};
-
-const splitTo3Digits = num => {
-  let result = [];
-  while (num) {
-    result.push(num % 1000);
-    num = getRoundedDistributedNum(num, 1000);
-  }
-  return result;
-};
-
-const convertNumber = num => {
-  num = Math.abs(num);
-  const arr = splitTo3Digits(num);
-  return arr
-    .map((n, i) => {
-      let res = convertToThreeDigits(n);
-      if (i > 0) res += ` ${SCALE[i - 1]}`;
-      return res;
-    })
-    .reverse()
-    .join(" ");
 };
