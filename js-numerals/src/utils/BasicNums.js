@@ -24,7 +24,7 @@ export const FROM_0_TO_19 = [
 export const TENS = [
   "",
   "twenty",
-  "thrity",
+  "thirty",
   "forty",
   "fifty",
   "sixty",
