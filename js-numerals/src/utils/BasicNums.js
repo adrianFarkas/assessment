@@ -32,3 +32,5 @@ export const TENS = [
   "eighty",
   "ninety"
 ];
+
+export const SCALE = ["thousand", "million", "billion", "trillion"];
