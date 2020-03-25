@@ -1,12 +1,5 @@
 # JavaScript/Front-end Developer - Exercise 1
 
-## Instructions
-
-- Fork this project.
-- Write tests.
-- Don't use external libraries for the conversion.
-- Commit the important milestones and not just the final result.
-
 ## Exercise description
 
 Create an application that contains a web form, which has a numeric input field and a submit button.
@@ -22,4 +15,13 @@ For example:
 17999 == seventeen thousand nine hundred and ninety-nine
 </pre>
 
-That's all.
+### Quick Start
+
+Live demo: https://numeral-converter.netlify.com/
+
+    $ npm install
+    $ npm start
+    
+For test: 
+
+    $ npm test -- converter
