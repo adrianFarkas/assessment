@@ -16,7 +16,7 @@ const convertNumber = (num, index) => {
   let word = convertToThreeDigits(num % 1000);
   let remainder = getRoundedDistributedNum(num, 1000);
 
-  if (index > 0) word += ` ${SCALE[index - 1]}`;
+  if (index > 0 && word !== "") word += ` ${SCALE[index - 1]}`;
 
   return `${convertNumber(remainder, index + 1)} ${word}`.trim();
 };
@@ -43,14 +43,15 @@ const convertToThreeDigits = num => {
 const convertFourDigits = num => {
   const firstHalf = getRoundedDistributedNum(num, 100);
   const secondHalf = num % 100;
+  let word = "";
 
   if (firstHalf % 10 !== 0) {
-    return `${convertToTwoDigits(firstHalf)}
-     hundred and ${convertToTwoDigits(secondHalf)}`;
+    word = `${convertToTwoDigits(firstHalf)} hundred`;
+    if (secondHalf) word += ` and ${convertToTwoDigits(secondHalf)}`;
+    return word;
   }
 
-  let word = convertNumber(num, 0);
-
+  word = convertNumber(num, 0);
   if (secondHalf) word = word.replace(SCALE[0], `${SCALE[0]} and`);
   return word;
 };
