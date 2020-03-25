@@ -53,11 +53,11 @@ describe("Number to word", () => {
       "two hundred and twenty thousand one hundred and twenty"
     );
     expect(numToWord(1000000)).toEqual("one million");
-    expect(numToWord(20004000)).toEqual("twenty-million and four thousand");
+    expect(numToWord(20004000)).toEqual("twenty million four thousand");
     expect(numToWord(99454521)).toEqual(
       "ninety-nine million four hundred and fifty-four thousand five hundred and twenty-one"
     );
-    expect(numToWord(3000050000)).toEqual("three billion and fifty thousand");
+    expect(numToWord(3000050000)).toEqual("three billion fifty thousand");
     expect(numToWord(654321074321)).toEqual(
       "six hundred and fifty-four billion three hundred and twenty-one million seventy-four thousand three hundred and twenty-one"
     );
