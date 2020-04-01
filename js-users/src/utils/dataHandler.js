@@ -19,3 +19,9 @@ export const updateUser = (id, data) => {
     .put(`${API_URL}/users/${id}.json`, data)
     .catch(err => Promise.reject(err.response.data));
 };
+
+export const addNewUser = data => {
+  return axios
+    .post(`${API_URL}/users.json`, data)
+    .catch(err => Promise.reject(err.response.data));
+};

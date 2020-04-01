@@ -6,6 +6,7 @@ import { pagination } from "utils/util";
 import { RootContext } from "contexts/RootContext";
 import { PageSelector } from "components/utils";
 import User from "components/user";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -40,6 +41,9 @@ function Users() {
         ))}
       </UserList>
       <PageSelector totalItems={state.length} itemPerPage={limit} />
+      <Link to="/new">
+        <button>Add New</button>
+      </Link>
     </Container>
   );
 }
