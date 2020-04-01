@@ -4,6 +4,7 @@ import useQueryParams from "hooks/useQueryParams";
 import { getUsers } from "utils/dataHandler";
 import { pagination } from "utils/util";
 import { RootContext } from "contexts/RootContext";
+import { PageSelector } from "components/utils";
 import User from "components/user";
 
 const Container = styled.div`
@@ -38,6 +39,7 @@ function Users() {
           <User key={user.id} {...user} />
         ))}
       </UserList>
+      <PageSelector totalItems={state.length} itemPerPage={limit} />
     </Container>
   );
 }
