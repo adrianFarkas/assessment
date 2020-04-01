@@ -8,6 +8,12 @@ export const getUsers = () => {
     .then(res => Promise.resolve(res.data));
 };
 
+export const getUser = id => {
+  return axios
+    .get(`${API_URL}/users/${id}.json`)
+    .then(res => Promise.resolve(res.data));
+};
+
 export const updateUser = (id, data) => {
   return axios
     .put(`${API_URL}/users/${id}.json`, data)

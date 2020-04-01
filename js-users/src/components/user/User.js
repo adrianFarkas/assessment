@@ -35,6 +35,11 @@ const User = ({ id, first_name, last_name, created_at, status }) => {
       <div>{last_name}</div>
       <div>{created_at}</div>
       <div>
+        <Link to={`/edit/${id}`}>
+          <div>
+            <FontAwesomeIcon icon={faEdit} />
+          </div>
+        </Link>
         <div onClick={setStatus}>
           <FontAwesomeIcon icon={icon} />
         </div>
