@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { addNewUser } from "utils/dataHandler";
 import { UserForm } from "components/utils";
 import { Redirect } from "react-router-dom";
+import { Container, Wrapper, CenteredCard, Title } from "style/global.styled";
 
 const New = () => {
   const [error, setError] = useState({});
@@ -28,16 +29,23 @@ const New = () => {
   if (added) return <Redirect to="/" />;
 
   return (
-    <UserForm
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-      errorMessages={error}
-      values={{
-        first_name: user.first_name,
-        last_name: user.last_name
-      }}
-      btnText="Add"
-    />
+    <Container>
+      <Wrapper>
+        <CenteredCard>
+          <Title>Create New User</Title>
+          <UserForm
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            errorMessages={error}
+            values={{
+              first_name: user.first_name,
+              last_name: user.last_name
+            }}
+            btnText="Create"
+          />
+        </CenteredCard>
+      </Wrapper>
+    </Container>
   );
 };
 

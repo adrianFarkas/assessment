@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import { getUser, updateUser } from "utils/dataHandler";
 import { UserForm } from "components/utils";
+import { Wrapper, Container, CenteredCard, Title } from "style/global.styled";
 
 const Edit = () => {
   const { userId } = useParams();
@@ -30,16 +31,23 @@ const Edit = () => {
   if (updated) return <Redirect to="/" />;
 
   return (
-    <UserForm
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-      errorMessages={error}
-      values={{
-        first_name: user.first_name,
-        last_name: user.last_name
-      }}
-      btnText="Edit"
-    />
+    <Container>
+      <Wrapper>
+        <CenteredCard>
+          <Title>Edit User</Title>
+          <UserForm
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            errorMessages={error}
+            values={{
+              first_name: user.first_name,
+              last_name: user.last_name
+            }}
+            btnText="Edit"
+          />
+        </CenteredCard>
+      </Wrapper>
+    </Container>
   );
 };
 
