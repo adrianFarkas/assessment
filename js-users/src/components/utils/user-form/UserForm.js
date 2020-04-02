@@ -1,4 +1,5 @@
 import React from "react";
+import InputField from "./input-field";
 
 const UserForm = ({
   onSubmit,
@@ -9,26 +10,22 @@ const UserForm = ({
 }) => {
   return (
     <form onSubmit={onSubmit}>
-      <div>
-        <div>First Name</div>
-        {errorMessages.first_name && <div>{errorMessages.first_name}</div>}
-        <input
-          name="first_name"
-          type="text"
-          value={values.first_name}
-          onChange={onChange}
-        />
-      </div>
-      <div>
-        <div>Last Name</div>
-        {errorMessages.last_name && <div>{errorMessages.last_name}</div>}
-        <input
-          name="last_name"
-          type="text"
-          value={values.last_name}
-          onChange={onChange}
-        />
-      </div>
+      <InputField
+        name="first_name"
+        type="text"
+        label="First Name"
+        error={errorMessages.first_name}
+        value={values.first_name}
+        onChange={onChange}
+      />
+      <InputField
+        name="last_name"
+        type="text"
+        label="Last Name"
+        error={errorMessages.last_name}
+        value={values.last_name}
+        onChange={onChange}
+      />
       <button type="submit">{btnText}</button>
     </form>
   );
