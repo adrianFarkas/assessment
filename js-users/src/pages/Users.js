@@ -7,17 +7,17 @@ import { RootContext } from "contexts/RootContext";
 import { PageSelector } from "components/utils";
 import User from "components/user";
 import { Link } from "react-router-dom";
+import { Container } from "style/global.styled";
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
+const Wrapper = styled(Container)`
+  width: 50%;
+  min-height: 100vh;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background: ${props => props.theme.colors.shadow};
 `;
 
 const UserList = styled.div`
+  width: 100%;
   overflow: hidden;
 `;
 
@@ -35,15 +35,17 @@ function Users() {
 
   return (
     <Container>
-      <UserList>
-        {pagination(state, actPage, limit).map(user => (
-          <User key={user.id} {...user} />
-        ))}
-      </UserList>
-      <PageSelector totalItems={state.length} itemPerPage={limit} />
-      <Link to="/new">
-        <button>Add New</button>
-      </Link>
+      <Wrapper>
+        <UserList>
+          {pagination(state, actPage, limit).map(user => (
+            <User key={user.id} {...user} />
+          ))}
+        </UserList>
+        <PageSelector totalItems={state.length} itemPerPage={limit} />
+        <Link to="/new">
+          <button>Add New</button>
+        </Link>
+      </Wrapper>
     </Container>
   );
 }

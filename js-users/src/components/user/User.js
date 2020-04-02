@@ -2,18 +2,102 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faLockOpen, faLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faLockOpen,
+  faLock,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
 import { updateUser } from "utils/dataHandler";
 import { RootContext } from "contexts/RootContext";
+import { IconCotnainer } from "style/global.styled";
+import moment from "moment";
 
 const Card = styled.div`
-  padding: 10px;
+  display: flex;
+  margin: 20px;
+  cursor: default;
+  color: ${props => props.theme.colors.blue};
+`;
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  position: relative;
+  border-radius: 6px;
+  background: ${props => props.theme.colors.light};
+  box-shadow: 4px 4px 10px ${props => props.theme.colors.shadow};
+`;
+
+const Icon = styled(IconCotnainer)`
+  border-radius: 6px 50% 50% 6px;
+  font-size: 30px;
+  color: ${props => props.theme.colors.light};
+  background: ${props => props.theme.colors.transparentBlue};
+  padding: 20px 25px 20px 20px;
+`;
+
+const Details = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  width: 100%;
+  margin: 10px;
   display: flex;
   align-items: center;
-  cursor: default;
-  text-decoration: ${props => props.locked && "line-through"};
-  :hover {
-    background: #f9f9f9;
+  justify-content: space-between;
+`;
+
+const Name = styled.div`
+  max-height: 60px;
+  overflow: auto;
+  max-width: 300px;
+`;
+
+const Date = styled.div`
+  font-size: 20px;
+  align-self: flex-end;
+  text-align: right;
+  div {
+    text-align: right;
+    font-weight: normal;
+  }
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100px;
+  margin-left: 10px;
+  border-radius: 6px;
+  background: ${props => props.theme.colors.light};
+  box-shadow: 4px 4px 10px ${props => props.theme.colors.shadow};
+  ${IconCotnainer} {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    :hover {
+      opacity: 0.8;
+    }
+  }
+`;
+const StrikeThrough = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: ${props => props.theme.colors.shadow};
+  display: ${props => !props.locked && "none"};
+  :after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 95%;
+    height: 5px;
+    transform: translate(-50%, -50%);
+    background: ${props => props.theme.colors.blue};
   }
 `;
 
@@ -28,22 +112,35 @@ const User = ({ id, first_name, last_name, created_at, status }) => {
   };
 
   const icon = status === "active" ? faLockOpen : faLock;
+  const date = moment(created_at).format("LL");
 
   return (
-    <Card locked={status === "locked"}>
-      <div>{first_name}</div>
-      <div>{last_name}</div>
-      <div>{created_at}</div>
-      <div>
+    <Card>
+      <Content>
+        <Icon>
+          <FontAwesomeIcon icon={faUser} />
+        </Icon>
+        <Details>
+          <Name>
+            <div>{first_name}</div>
+            <div>{last_name}</div>
+          </Name>
+          <Date>
+            <div>created on:</div> {date}
+          </Date>
+        </Details>
+        <StrikeThrough locked={status === "locked"} />
+      </Content>
+      <Buttons>
         <Link to={`/edit/${id}`}>
-          <div>
+          <IconCotnainer>
             <FontAwesomeIcon icon={faEdit} />
-          </div>
+          </IconCotnainer>
         </Link>
-        <div onClick={setStatus}>
+        <IconCotnainer onClick={setStatus}>
           <FontAwesomeIcon icon={icon} />
-        </div>
-      </div>
+        </IconCotnainer>
+      </Buttons>
     </Card>
   );
 };
