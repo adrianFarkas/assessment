@@ -15,7 +15,7 @@ import moment from "moment";
 
 const Card = styled.div`
   display: flex;
-  margin: 20px;
+  margin: 20px 0;
   cursor: default;
   color: ${props => props.theme.colors.blue};
 `;
