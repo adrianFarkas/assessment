@@ -7,17 +7,9 @@ import { RootContext } from "contexts/RootContext";
 import { PageSelector } from "components/utils";
 import User from "components/user";
 import { Link } from "react-router-dom";
-import { Container, IconCotnainer } from "style/global.styled";
+import { Container, IconCotnainer, Wrapper } from "style/global.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-
-const Wrapper = styled(Container)`
-  width: 50%;
-  padding: 20px;
-  min-height: 100vh;
-  flex-direction: column;
-  background: ${props => props.theme.colors.shadow};
-`;
 
 const UserList = styled.div`
   width: 100%;

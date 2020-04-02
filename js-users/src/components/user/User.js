@@ -10,23 +10,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { updateUser } from "utils/dataHandler";
 import { RootContext } from "contexts/RootContext";
-import { IconCotnainer } from "style/global.styled";
+import { IconCotnainer, Card } from "style/global.styled";
 import moment from "moment";
 
-const Card = styled.div`
+const Wrapper = styled.div`
   display: flex;
   margin: 20px 0;
   cursor: default;
   color: ${props => props.theme.colors.blue};
 `;
 
-const Content = styled.div`
-  width: 100%;
+const Content = styled(Card)`
   display: flex;
   position: relative;
-  border-radius: 6px;
-  background: ${props => props.theme.colors.light};
-  box-shadow: 4px 4px 10px ${props => props.theme.colors.shadow};
 `;
 
 const Icon = styled(IconCotnainer)`
@@ -63,15 +59,12 @@ const Date = styled.div`
   }
 `;
 
-const Buttons = styled.div`
+const Buttons = styled(Card)`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 100px;
   margin-left: 10px;
-  border-radius: 6px;
-  background: ${props => props.theme.colors.light};
-  box-shadow: 4px 4px 10px ${props => props.theme.colors.shadow};
   ${IconCotnainer} {
     cursor: pointer;
     transition: opacity 0.3s;
@@ -115,7 +108,7 @@ const User = ({ id, first_name, last_name, created_at, status }) => {
   const date = moment(created_at).format("LL");
 
   return (
-    <Card>
+    <Wrapper>
       <Content>
         <Icon>
           <FontAwesomeIcon icon={faUser} />
@@ -141,7 +134,7 @@ const User = ({ id, first_name, last_name, created_at, status }) => {
           <FontAwesomeIcon icon={icon} />
         </IconCotnainer>
       </Buttons>
-    </Card>
+    </Wrapper>
   );
 };
 
