@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
 
 export const colors = {
   light: "#ffffff",
+  lightShadow: "#ffffff30",
   shadow: "#00000030",
   blue: "#2a6b89",
   transparentBlue: "#398fb790"

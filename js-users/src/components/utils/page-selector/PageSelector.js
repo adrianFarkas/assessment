@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import useQueryParams from "hooks/useQueryParams";
 import { Redirect, Link } from "react-router-dom";
 
@@ -8,8 +8,28 @@ const Selector = styled.div`
 `;
 
 const PageNum = styled(Link)`
-  padding: 5px;
-  color: ${props => props.selected && "red"};
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: bold;
+  ${props => css`
+    color: ${props.theme.colors.blue};
+    background: ${props.theme.colors.light};
+    box-shadow: 2px 2px 2px ${props.theme.colors.lightShadow},
+      -2px -2px 2px ${props.theme.colors.lightShadow},
+      -2px 2px 2px ${props.theme.colors.lightShadow},
+      2px -2px 2px ${props.theme.colors.lightShadow};
+  `}
+  ${props =>
+    props.selected &&
+    css`
+      color: ${props.theme.colors.light};
+      background: ${props.theme.colors.blue};
+    `}
 `;
 
 const PageSelector = ({ path = "/", itemPerPage, totalItems }) => {
