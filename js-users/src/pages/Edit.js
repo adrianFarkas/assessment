@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getUser, updateUser } from "utils/dataHandler";
 import { UserForm } from "components/utils";
 import { Wrapper, Container, CenteredCard, Title } from "style/global.styled";
 
 const Edit = () => {
+  const history = useHistory();
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [error, setError] = useState({});
@@ -28,7 +29,7 @@ const Edit = () => {
   };
 
   if (!user) return <div>Loading...</div>;
-  if (updated) return <Redirect to="/" />;
+  if (updated) history.goBack();
 
   return (
     <Container>
