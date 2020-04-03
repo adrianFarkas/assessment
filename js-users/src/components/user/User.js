@@ -82,15 +82,21 @@ const StrikeThrough = styled.div`
   border-radius: 6px;
   background: ${props => props.theme.colors.shadow};
   display: ${props => !props.locked && "none"};
+  :before,
   :after {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     width: 95%;
-    height: 5px;
-    transform: translate(-50%, -50%);
+    height: 3px;
     background: ${props => props.theme.colors.blue};
+  }
+  :before {
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+  :after {
+    transform: translate(-50%, -50%) rotate(-5deg);
   }
 `;
 
