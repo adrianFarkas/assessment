@@ -6,7 +6,7 @@ import {
   faEdit,
   faLockOpen,
   faLock,
-  faUser
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { updateUser } from "utils/dataHandler";
 import { RootContext } from "contexts/RootContext";
@@ -18,6 +18,9 @@ const Wrapper = styled.div`
   margin: 20px 0;
   cursor: default;
   color: ${props => props.theme.colors.blue};
+  @media (max-width: 500px) {
+    margin: 10px 0;
+  }
 `;
 
 const Content = styled(Card)`
@@ -31,6 +34,10 @@ const Icon = styled(IconCotnainer)`
   color: ${props => props.theme.colors.light};
   background: ${props => props.theme.colors.transparentBlue};
   padding: 20px 25px 20px 20px;
+  @media (max-width: 500px) {
+    font-size: 20px;
+    padding: 10px 15px 10px 10px;
+  }
 `;
 
 const Details = styled.div`
@@ -41,6 +48,9 @@ const Details = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 
 const Name = styled.div`
@@ -57,6 +67,9 @@ const Date = styled.div`
     text-align: right;
     font-weight: normal;
   }
+  @media (max-width: 500px) {
+    font-size: 15px;
+  }
 `;
 
 const Buttons = styled(Card)`
@@ -70,6 +83,9 @@ const Buttons = styled(Card)`
     transition: opacity 0.3s;
     :hover {
       opacity: 0.8;
+    }
+    @media (max-width: 500px) {
+      font-size: 15px;
     }
   }
 `;

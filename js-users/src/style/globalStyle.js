@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
     html, body {
         margin: 0;
+        min-width: 350px;
         font-family: sans-serif;
         background-attachment: fixed;
         background: rgb(67, 208, 226);
@@ -30,7 +31,7 @@ export const colors = {
   lightShadow: "#ffffff30",
   shadow: "#00000030",
   blue: "#2a6b89",
-  transparentBlue: "#398fb790"
+  transparentBlue: "#398fb790",
 };
 
 export default GlobalStyle;

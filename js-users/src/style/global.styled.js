@@ -12,6 +12,13 @@ export const Wrapper = styled(Container)`
   min-height: 100vh;
   flex-direction: column;
   background: ${props => props.theme.colors.shadow};
+  @media (max-width: 1200px) {
+    width: 80%;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 20px 10px;
+  }
 `;
 
 export const IconCotnainer = styled(Container)`
