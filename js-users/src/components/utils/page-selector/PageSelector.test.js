@@ -37,4 +37,10 @@ describe("Test PageSelector component", () => {
     expect(wrapper.children()).toHaveLength(5);
     expect(wrapper.text()).toEqual("3132333435");
   });
+  test("Renders 1 button if there are few user", () => {
+    useQueryParams.mockReturnValue({ page: 1 });
+    wrapper = shallow(<PageSelector itemPerPage={10} totalItems={5} />);
+    expect(wrapper.children()).toHaveLength(1);
+    expect(wrapper.text()).toEqual("1");
+  });
 });
