@@ -6,11 +6,12 @@ import { Container, Wrapper, CenteredCard, Title } from "style/global.styled";
 
 const New = () => {
   const [error, setError] = useState({});
+  const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
-    status: "active"
+    status: "active",
   });
 
   const handleChange = e => {
@@ -21,9 +22,13 @@ const New = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoading(true);
     addNewUser(user)
       .then(() => setAdded(true))
-      .catch(errMsg => setError(errMsg));
+      .catch(errMsg => {
+        setLoading(false);
+        setError(errMsg);
+      });
   };
 
   if (added) return <Redirect to="/" />;
@@ -39,9 +44,10 @@ const New = () => {
             errorMessages={error}
             values={{
               first_name: user.first_name,
-              last_name: user.last_name
+              last_name: user.last_name,
             }}
             btnText="Create"
+            loading={loading}
           />
         </CenteredCard>
       </Wrapper>

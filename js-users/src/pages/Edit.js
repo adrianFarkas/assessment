@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { getUser, updateUser } from "utils/dataHandler";
-import { UserForm } from "components/utils";
+import { UserForm, Loader } from "components/utils";
 import { Wrapper, Container, CenteredCard, Title } from "style/global.styled";
 
 const Edit = () => {
@@ -9,6 +9,7 @@ const Edit = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
   const [error, setError] = useState({});
+  const [loading, setLoading] = useState(false);
   const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
@@ -23,12 +24,24 @@ const Edit = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoading(true);
     updateUser(userId, user)
       .then(() => setUpdated(true))
-      .catch(errMsg => setError(errMsg));
+      .catch(errMsg => {
+        setError(errMsg);
+        setLoading(false);
+      });
   };
 
-  if (!user) return <div>Loading...</div>;
+  if (!user)
+    return (
+      <Container>
+        <Wrapper>
+          <Loader />
+        </Wrapper>
+      </Container>
+    );
+
   if (updated) history.goBack();
 
   return (
@@ -42,9 +55,10 @@ const Edit = () => {
             errorMessages={error}
             values={{
               first_name: user.first_name,
-              last_name: user.last_name
+              last_name: user.last_name,
             }}
             btnText="Edit"
+            loading={loading}
           />
         </CenteredCard>
       </Wrapper>

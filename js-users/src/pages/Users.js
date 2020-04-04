@@ -4,12 +4,16 @@ import useQueryParams from "hooks/useQueryParams";
 import { getUsers } from "utils/dataHandler";
 import { pagination, sortByDate } from "utils/util";
 import { RootContext } from "contexts/RootContext";
-import { PageSelector, Sorter } from "components/utils";
+import { PageSelector, Sorter, Loader } from "components/utils";
 import User from "components/user";
 import { Link } from "react-router-dom";
 import { Container, IconCotnainer, Wrapper } from "style/global.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+
+const Wrapp = styled(Wrapper)`
+  justify-content: flex-start;
+`;
 
 const Head = styled.div`
   width: 100%;
@@ -42,13 +46,20 @@ function Users() {
     getUsers().then(users => dispatch({ type: "STORE_USERS", payload: users }));
   }, [dispatch]);
 
-  if (!state) return <Container>Loading...</Container>;
+  if (!state)
+    return (
+      <Container>
+        <Wrapper>
+          <Loader />
+        </Wrapper>
+      </Container>
+    );
 
   const sorted = sortByDate(state, date);
 
   return (
     <Container>
-      <Wrapper>
+      <Wrapp>
         <Head>
           <Link style={{ alignSelf: "flex-start" }} to="/new">
             <IconButton>
@@ -63,7 +74,7 @@ function Users() {
           ))}
         </UserList>
         <PageSelector totalItems={state.length} itemPerPage={limit} />
-      </Wrapper>
+      </Wrapp>
     </Container>
   );
 }
